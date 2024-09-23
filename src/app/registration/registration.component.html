@@ -1,0 +1,186 @@
+<section class="container">
+    <header>Registration Form</header>
+  
+    <form class="form" [formGroup]="registrationForm" (ngSubmit)="onSubmitReg()">
+      <div class="column">
+        <div class="input-box">
+          <input
+            type="text"
+            placeholder="First Name"
+            formControlName="firstName"
+            #firstName
+          />
+          <small>{{firstName.value.length}}/30</small>
+          
+          @if (registrationForm.get('firstName')?.errors?.['required'] &&
+          registrationForm.get('firstName')?.touched) {
+          <small>*first Name is a mandetory field</small>
+          }
+  
+          @if (registrationForm.get('firstName')?.errors?.['noSpaceAllowed'] &&
+          registrationForm.get('firstName')?.touched ) {
+          <small>*No Space allowed in First Name field </small>
+          }
+
+          @if (registrationForm.get('firstName')?.errors?.['minLength'] &&
+          registrationForm.get('firstName')?.touched ) {
+          <small>*Minimum length is 3</small>
+          }
+
+          @if (registrationForm.get('firstName')?.errors?.['minLength'] &&
+          registrationForm.get('firstName')?.touched ) {
+          <small>*Maximum length is 15</small>
+          }
+
+        </div>
+        <div class="input-box">
+          <input type="text" placeholder="Last Name" formControlName="lastName" />
+          @if (registrationForm.get('lastName')?.invalid &&
+          registrationForm.get('lastName')?.touched ) {
+          <small>*Last Name is a mandetory field</small>
+          }
+        </div>
+      </div>
+  
+      <div class="input-box">
+        <input type="text" placeholder="Email" formControlName="gmail" />
+        @if (registrationForm.get('gmail')?.invalid &&
+        registrationForm.get('gmail')?.touched ) {
+        <small>*Enter a valid Mail ID</small>
+        }
+      </div>
+  
+      <div class="column">
+        <div class="input-box">
+          <input type="text" placeholder="username" formControlName="userName" />
+          <button class="btn-gen-username" type="button" (click)="generateUsername()">
+            Create a Username
+          </button>
+        </div>
+        <div class="input-box">
+          <input
+            type="date"
+            placeholder="Date of Birth"
+            formControlName="dateOfBirth"
+          />
+        </div>
+      </div>
+  
+      <div class="gender-box">
+        <h3>Gender</h3>
+        <div class="gender-option">
+          <div class="gender">
+            <input
+              type="radio"
+              value="male"
+              id="check-male"
+              formControlName="gender"
+            />
+            <label for="check-male">Male</label>
+          </div>
+          <div class="gender">
+            <input
+              type="radio"
+              value="female"
+              id="check-female"
+              formControlName="gender"
+            />
+            <label for="check-female">Female</label>
+          </div>
+          <div class="gender">
+            <input
+              type="radio"
+              value="other"
+              id="check-other"
+              formControlName="gender"
+            />
+            <label for="check-other">Prefer not to say</label>
+          </div>
+        </div>
+      </div>
+  
+      <div class="input-box address" formGroupName="address">
+        <label>Address</label>
+        <input
+          type="text"
+          placeholder="Street address"
+          formControlName="street"
+        />
+        <div class="column">
+          <div class="select-box">
+            <select name="country" formControlName="country">
+              <option hidden>Country</option>
+              <option>America</option>
+              <option>Japan</option>
+              <option>India</option>
+              <option>Nepal</option>
+            </select>
+          </div>
+          <input type="text" placeholder="City" formControlName="city" />
+        </div>
+        <div class="column">
+          <input type="text" placeholder="Region" formControlName="region" />
+          <input
+            type="number"
+            placeholder="Postal code"
+            formControlName="postalCode"
+          />
+        </div>
+      </div>
+  
+      <!-- HTML for Skills Form Array -->
+  
+      <div class="input-box skills" formArrayName="skills">
+        <label>Skills: </label>
+        <input type="text" placeholder="Add Skills..." />
+      </div>
+      <input
+        type="submit"
+        value="Submit"
+        class="submit-btn"
+        [disabled]="registrationForm.invalid"
+        />
+      
+    </form>
+  </section>
+
+  
+<!--   
+  <div class="container">
+    <label> <b>Name: </b></label>
+    <h2>{{ registrationFormData.firstName }}  {{ registrationFormData.lastName }}</h2>
+    
+    <label><b>Gmail ID: </b></label>
+    <span>{{ registrationFormData.gmail }}</span>
+  
+    <label> <b>Username: </b></label>
+    <span>{{ registrationFormData.userName }}</span>
+  
+    <label><b>Date Of Birth: </b></label>
+    <span>{{ registrationFormData.dateOfBirth }}</span>
+  
+    <label><b>Gender: </b></label>
+    <span>{{ registrationFormData.gender }}</span>
+  
+    <div class="container">
+      <h3><b>Address: </b></h3>
+      <hr>
+      <label><b>Street: </b></label>
+      <span>{{ registrationFormData.address.street}}</span>
+  
+      <label><b>Country: </b></label>
+      <span>{{ registrationFormData.address.country}}</span>
+  
+      <label><b>City: </b></label>
+      <span>{{ registrationFormData.address.city}}</span>
+  
+      <label><b>Region: </b></label>
+      <span>{{ registrationFormData.address.region}}</span>
+  
+      <label><b>Postal Code: </b></label>
+      <span>{{ registrationFormData.address.postalCode}}</span>
+    </div>
+  
+    <label><b>Skills: </b></label>
+    <span>{{ registrationFormData.skills}}</span>
+  </div> -->
